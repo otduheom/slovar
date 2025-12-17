@@ -15,7 +15,10 @@ module.exports = (sequelize, DataTypes) => {
   Word.init(
     {
       name: DataTypes.STRING,
-      category: DataTypes.ENUM,
+      category: {
+        type: DataTypes.ENUM('Поколение Z', 'Миллениалы', 'Бумеры'), // ← ДОБАВЬТЕ ЗНАЧЕНИЯ
+        allowNull: false,
+      },
       desc: DataTypes.STRING,
       example: DataTypes.STRING,
       countLike: DataTypes.INTEGER,
