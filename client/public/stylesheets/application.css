@@ -11,9 +11,8 @@
 /* element styling */
 html {
   height: 100%;
-  background-color: #32bb7d;
-  background: url(../images/diamond-bg.jpg);
-  background-attachment: fixed;
+  background-color: #e0f7ff;
+  /* Убрали фон-картинку, чтобы фон страниц был светло-голубым */
   line-height: 1.4;
 }
 
@@ -61,6 +60,10 @@ input[type=text], input[type=password], textarea {
 /* formatting */
 .bg-dk-green {
   background-color: #05724f;
+}
+
+.bg-light-blue {
+  background-color: #e0f7ff;
 }
 
 .bg-white {
