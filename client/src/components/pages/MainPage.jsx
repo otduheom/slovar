@@ -2,17 +2,21 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router';
 import axiosInstance from '../../shared/lib/axiosInstance';
+import { Row, Container, Col } from 'react-bootstrap';
 
 export default function MainPage({ user }) {
-const testProtectedRequest = async () => {
+  const [words, setWords] = useState([]);
+  const testProtectedRequest = async () => {
     try {
       // Запрос пойдет на /api/test (baseURL + /test)
       const res = await axiosInstance.get('/test');
       console.log('Success response from /api/test:', res.data);
       alert(`Success: ${res.data.message}\nUser email: ${res.data.userDataFromToken.email}`);
-
     } catch (error) {
-      console.error('Error response from /api/test:', error.response ? error.response.data : error.message);
+      console.error(
+        'Error response from /api/test:',
+        error.response ? error.response.data : error.message,
+      );
       alert(`Error: ${error.response ? error.response.data.message : error.message}`);
     }
   };
@@ -25,9 +29,21 @@ const testProtectedRequest = async () => {
       ) : (
         <p>You are a guest.</p>
       )}
+      <Container>
+        <Row>
+          {words.map((item) => (
+            <Col sm={3}>
+              <CardNews words={item} />
+            </Col>
+          ))}
+        </Row>
+      </Container>
 
       {/* Кнопка для проверки токена */}
-      <button onClick={testProtectedRequest} style={{ marginTop: '20px', padding: '10px', cursor: 'pointer' }}>
+      <button
+        onClick={testProtectedRequest}
+        style={{ marginTop: '20px', padding: '10px', cursor: 'pointer' }}
+      >
         Test Protected API (/api/test)
       </button>
     </>
