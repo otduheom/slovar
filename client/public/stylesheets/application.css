@@ -216,7 +216,7 @@ input[type=text], input[type=password], textarea {
 }
 
 .pad-b-4 {
-  padding-bottom: 4em;
+  padding-bottom: 1em;
 }
 
 .pad-b-8 {
@@ -296,4 +296,27 @@ input[type=text], input[type=password], textarea {
 
 .error {
   color: red;
+}
+
+.buttons-container {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.main-button {
+  padding: 15px 30px;
+  cursor: pointer;
+  font-size: 16px;
+  background-color: #32bb7d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  min-width: 200px;
+}
+
+.main-button:hover {
+  background-color: #6ec7a5;
 }
