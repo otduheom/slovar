@@ -44,9 +44,8 @@ function Header({ user, setUser }) {
           </ul>
         </nav>
 
-        <div className="logo-container">
-          <img src="/images/logo.png" alt="brokk" className="center block logo" />
-          <h1>Alex Blog</h1>
+        <div style={{ textAlign: 'center', marginTop: '20px' , color: '#32bb7d'}}>
+          <h1>Словарь поколений</h1>
         </div>
       </div>
     </header>
