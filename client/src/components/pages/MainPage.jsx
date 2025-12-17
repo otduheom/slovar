@@ -1,0 +1,35 @@
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router';
+import axiosInstance from '../../shared/lib/axiosInstance';
+
+export default function MainPage({ user }) {
+const testProtectedRequest = async () => {
+    try {
+      // Запрос пойдет на /api/test (baseURL + /test)
+      const res = await axiosInstance.get('/test');
+      console.log('Success response from /api/test:', res.data);
+      alert(`Success: ${res.data.message}\nUser email: ${res.data.userDataFromToken.email}`);
+
+    } catch (error) {
+      console.error('Error response from /api/test:', error.response ? error.response.data : error.message);
+      alert(`Error: ${error.response ? error.response.data.message : error.message}`);
+    }
+  };
+
+  return (
+    <>
+      <h2>Welcome to the Main Page</h2>
+      {user?.status === 'logged' ? (
+        <p>You are logged in as {user.data.name || user.data.email}.</p>
+      ) : (
+        <p>You are a guest.</p>
+      )}
+
+      {/* Кнопка для проверки токена */}
+      <button onClick={testProtectedRequest} style={{ marginTop: '20px', padding: '10px', cursor: 'pointer' }}>
+        Test Protected API (/api/test)
+      </button>
+    </>
+  );
+}
