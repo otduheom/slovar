@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('Words', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,31 +11,38 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING,
+      },
+      category: {
+        type: Sequelize.ENUM('Поколение Z', 'Миллениалы', 'Бумеры'),
         allowNull: false,
       },
-      email: {
-        type: Sequelize.STRING,
+      desc: {
         allowNull: false,
-        unique: true,
+        type: Sequelize.STRING,
       },
-      password: {
-        type: Sequelize.STRING,
+      example: {
         allowNull: false,
+        type: Sequelize.STRING,
+      },
+      countLike: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
       },
       createdAt: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('now'),
       },
       updatedAt: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('now'),
       },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('Words');
   },
 };

@@ -8,6 +8,7 @@ import SignUpPage from './components/pages/SignUpPage';
 import { useEffect } from 'react';
 import axiosInstance, { setAccessToken } from '../src/shared/lib/axiosInstance';
 import ProtectedRoute from './components/HOCs/ProtectedRoute'; 
+import Profile from './components/pages/Profile';
 
 
 function App() {
@@ -43,6 +44,10 @@ function App() {
               <SignUpPage setUser={setUser} />
             </ProtectedRoute>
           ),},
+          {
+          path:'/profile',
+          element:<Profile />
+          },
         {
           path: '/login',
           element: (

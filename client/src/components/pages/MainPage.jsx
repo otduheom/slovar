@@ -25,7 +25,30 @@ export default function MainPage({ user }) {
     <>
       <h2>Welcome to the Main Page</h2>
       {user?.status === 'logged' ? (
-        <p>You are logged in as {user.data.name || user.data.email}.</p>
+        <>
+          <p>You are logged in as {user.data.name || user.data.email}.</p>
+          
+          <div className="buttons-container">
+            <button 
+              onClick={() => alert('Кнопка 1')} 
+              className="main-button"
+            >
+              Кнопка 1
+            </button>
+            <button 
+              onClick={() => alert('Кнопка 2')} 
+              className="main-button"
+            >
+              Кнопка 2
+            </button>
+            <button 
+              onClick={() => alert('Кнопка 3')} 
+              className="main-button"
+            >
+              Кнопка 3
+            </button>
+          </div>
+        </>
       ) : (
         <p>You are a guest.</p>
       )}

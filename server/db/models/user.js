@@ -3,7 +3,8 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    static associate() {
+    static associate(models) {
+      this.belongsToMany(models.Word, { through: 'Like', foreignKey: 'UserId' });
     }
 
     static validateEmail(email) {
@@ -105,7 +106,6 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING,
       email: DataTypes.STRING,
       password: DataTypes.STRING,
-      isAdmin: DataTypes.BOOLEAN,
     },
     {
       sequelize,

@@ -8,7 +8,7 @@ function CardWord({ words }) {
         <Card.Subtitle className="mb-2 text-muted">{word.category}</Card.Subtitle>
         <Card.Text>{words.desc}</Card.Text>
         <Card.Text>{words.example}</Card.Text>
-        <Card.Link href="#">{words.count}</Card.Link>
+        <Card.Link href="#">{words.LikeLike}</Card.Link>
       </Card.Body>
     </Card>
   );
