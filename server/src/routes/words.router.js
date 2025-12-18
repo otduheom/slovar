@@ -1,14 +1,20 @@
 const LikeController = require('../controllers/LikeController');
 const WordsController = require('../controllers/words.controller');
-const LikeController = require('../controllers/LikeController');
 const { verifyAccessToken } = require('../middlewares/verifyTokens');
 const wordsRouter = require('express').Router();
-const{verifyAccessToken}= require('../middlewares/verifyTokens')
 
-//Основные операции со словами
+// Middleware для проверки прав администратора
+const verifyAdmin = (req, res, next) => {
+  const user = res.locals.user;
+  if (!user || !user.isAdmin) {
+    return res.status(403).json({ message: 'Доступ запрещен. Требуются права администратора.' });
+  }
+  next();
+};
 
 wordsRouter.get('/', WordsController.getAllWords);
 wordsRouter.post('/:wordId/like', verifyAccessToken, LikeController.toggleLike);
 wordsRouter.get('/liked', verifyAccessToken, LikeController.getLikedWords);
+wordsRouter.delete('/:wordId', verifyAccessToken, verifyAdmin, WordsController.deleteWord);
 
 module.exports = wordsRouter;

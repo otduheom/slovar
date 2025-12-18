@@ -2,61 +2,72 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 3rem;
+  min-height: 60vh;
+  padding: 2rem;
 }
 
 .form {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 400px;
-  padding: 2rem;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 450px;
+  padding: 2.5rem;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .inputGroup {
   display: flex;
-  margin-bottom: 1rem;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
 }
 
 .inputLabel {
-  display: flex;
-  align-items: center;
-  padding: 0.75rem;
-  background-color: #e9ecef;
-  border: 1px solid #ced4da;
-  border-right: none;
-  border-radius: 4px 0 0 4px;
-  min-width: 100px;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #4a5568;
+  font-size: 0.9rem;
 }
 
 .input {
-  flex: 1;
-  padding: 0.75rem;
-  border: 1px solid #ced4da;
-  border-radius: 0 4px 4px 0;
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
   font-size: 1rem;
+  transition: all 0.2s ease;
+  background: #f8fafc;
 }
 
 .input:focus {
   outline: none;
-  border-color: #80bdff;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 .submitButton {
-  padding: 0.75rem 1.5rem;
-  background-color: #0d6efd;
-  color: pink;
+  padding: 0.875rem 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 12px;
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.2s;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(102, 126, 234, 0.2);
+  margin-top: 0.5rem;
 }
 
 .submitButton:hover {
-  background-color: #0b5ed7;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(102, 126, 234, 0.3);
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.submitButton:active {
+  transform: translateY(0);
 }

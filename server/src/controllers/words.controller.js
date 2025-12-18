@@ -5,5 +5,16 @@ class WordsController {
     const words = await WordsService.getAll();
     res.status(200).json(words);
   }
+
+  static async deleteWord(req, res) {
+    try {
+      const { wordId } = req.params;
+      await WordsService.deleteWord(wordId);
+      return res.status(200).json({ message: 'Слово успешно удалено' });
+    } catch (error) {
+      console.error('Error deleting word:', error);
+      return res.status(500).json({ message: 'Ошибка при удалении слова' });
+    }
+  }
 }
 module.exports = WordsController;
