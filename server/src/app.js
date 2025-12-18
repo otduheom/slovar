@@ -5,6 +5,8 @@ require('dotenv').config();
 
 const app = express();
 
+//Регистрация
+
 serverConfig(app);
 
 app.use('/api', apiRouter);
@@ -31,6 +33,6 @@ app.use((req, res) => {
   res.status(404).send('Not found');
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => console.log(`Сервер запушен на ${PORT}`));
