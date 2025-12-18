@@ -17,6 +17,8 @@ class WordsService {
     });
     
     return true;
+  }
+  
   static postOne(data) {
     return Word.create(data);
   }

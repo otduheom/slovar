@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import axiosInstance from '../../shared/lib/axiosInstance';
-import { Row, Col, Container, Form, Button } from 'react-bootstrap';
+import { Row, Col, Container, Form } from 'react-bootstrap';
 import CardWord from '../ui/CardWords';
 
 export default function MainPage({ user }) {
@@ -41,7 +41,7 @@ export default function MainPage({ user }) {
       localStorage.removeItem('selectedCategory');
     }
   }, [selectedCategory]);
- 
+
   // Фильтрация слов по выбранной категории
   const filteredWords = selectedCategory
     ? words.filter((word) => word.category === selectedCategory)
@@ -104,42 +104,77 @@ export default function MainPage({ user }) {
             >
               Зумеры
             </button>
-            <Container>
-              <Button type="submit" onClick={() => setShowForm(!showForm)}>
-                Создать слово
-              </Button>
+            <div className="create-word-button-container">
+              <button
+                type="button"
+                className={`main-button ${showForm ? 'form-open' : ''}`}
+                onClick={() => setShowForm(!showForm)}
+              >
+                {showForm ? '✕ Закрыть форму' : '+ Создать слово'}
+              </button>
+            </div>
 
-              {showForm && (
-                <Form onSubmit={submitHandler}>
-                  Слово:
-                  <Form.Control type="text" name="name" />
-                  Категория:
-                  <Form.Select aria-label="Категория" name="category">
-                    <option>Категория</option>
-                    <option value="Поколение Z">Поколение Z</option>
-                    <option value="Миллениалы">Миллениалы</option>
-                    <option value="Бумеры">Бумеры</option>
-                  </Form.Select>
-                  Описание:
-                  <Form.Control type="text" name="desc" />
-                  Пример использования:
-                  <Form.Control type="text" name="example" />
-                  <Button type="submit">Добавить слово</Button>
+            {showForm && (
+              <div className="add-word-form-container">
+                <Form onSubmit={submitHandler} className="add-word-form">
+                  <h3 className="form-title">Добавить новое слово</h3>
+
+                  <div className="form-group">
+                    <label className="form-label">Слово</label>
+                    <Form.Control
+                      type="text"
+                      name="name"
+                      className="form-input"
+                      required
+                      placeholder="Введите слово"
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label">Категория</label>
+                    <Form.Select
+                      aria-label="Категория"
+                      name="category"
+                      className="form-select"
+                      required
+                    >
+                      <option value="">Выберите категорию</option>
+                      <option value="Поколение Z">Поколение Z</option>
+                      <option value="Миллениалы">Миллениалы</option>
+                      <option value="Бумеры">Бумеры</option>
+                    </Form.Select>
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label">Описание</label>
+                    <Form.Control
+                      type="text"
+                      name="desc"
+                      className="form-input"
+                      required
+                      placeholder="Опишите значение слова"
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label">Пример использования</label>
+                    <Form.Control
+                      type="text"
+                      name="example"
+                      className="form-input"
+                      required
+                      placeholder="Приведите пример использования"
+                    />
+                  </div>
+
+                  <button type="submit" className="form-submit-button">
+                    Добавить слово
+                  </button>
                 </Form>
-              )}
-
-              <button onClick={() => setSelectedCategory('Миллениалы')} className="main-button">
-                Миллениалы
-              </button>
-              <button onClick={() => setSelectedCategory('Бумеры')} className="main-button">
-                Бумеры
-              </button>
-              <button onClick={() => setSelectedCategory('Поколение Z')} className="main-button">
-                Зумеры
-              </button>
-            </Container>
+              </div>
+            )}
           </div>
-          <Container style={{ marginTop: '2rem' }}>
+          <Container className="words-container">
             <Row className="g-4">
               {filteredWords.map((word) => (
                 <Col sm={4} key={word.id} className="d-flex">
@@ -155,8 +190,8 @@ export default function MainPage({ user }) {
           </Container>
         </>
       ) : (
-        <div style={{ textAlign: 'center', padding: '2rem' }}>
-          <p style={{ fontSize: '1.25rem', color: '#4a5568' }}>Вы не вошли в систему.</p>
+        <div className="guest-message">
+          <p className="guest-message-text">Вы не вошли в систему.</p>
         </div>
       )}
     </div>
