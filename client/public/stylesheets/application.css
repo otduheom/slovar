@@ -307,7 +307,7 @@ input[type=text], input[type=password], textarea {
 }
 
 .main-button {
-  padding: 15px 30px;
+  padding: 15px;
   cursor: pointer;
   font-size: 16px;
   background-color: #32bb7d;
@@ -315,6 +315,7 @@ input[type=text], input[type=password], textarea {
   border: none;
   border-radius: 5px;
   min-width: 200px;
+  margin-bottom: 10px;
 }
 
 .main-button:hover {

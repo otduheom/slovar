@@ -4,7 +4,7 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      this.belongsToMany(models.Word, { through: 'Like', foreignKey: 'UserId' });
+      this.belongsToMany(models.Word, { through: 'Like', foreignKey: 'userId' });
     }
 
     static validateEmail(email) {
