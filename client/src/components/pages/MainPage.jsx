@@ -1,11 +1,23 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router';
+import { useEffect, useState } from 'react';
 import axiosInstance from '../../shared/lib/axiosInstance';
-import { Row, Container, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
+import CardWord from '../ui/CardWords';
 
 export default function MainPage({ user }) {
+  //Слова из БД
+
   const [words, setWords] = useState([]);
+
+  useEffect(() => {
+    axios.get('/api/words').then((response) => {
+      setWords(response.data);
+      console.log(response.data);
+    });
+  }, []);
+
+  //Регистрация
+
   const testProtectedRequest = async () => {
     try {
       // Запрос пойдет на /api/test (baseURL + /test)
@@ -27,24 +39,15 @@ export default function MainPage({ user }) {
       {user?.status === 'logged' ? (
         <>
           <p>You are logged in as {user.data.name || user.data.email}.</p>
-          
+
           <div className="buttons-container">
-            <button 
-              onClick={() => alert('Кнопка 1')} 
-              className="main-button"
-            >
+            <button onClick={() => alert('Кнопка 1')} className="main-button">
               Кнопка 1
             </button>
-            <button 
-              onClick={() => alert('Кнопка 2')} 
-              className="main-button"
-            >
+            <button onClick={() => alert('Кнопка 2')} className="main-button">
               Кнопка 2
             </button>
-            <button 
-              onClick={() => alert('Кнопка 3')} 
-              className="main-button"
-            >
+            <button onClick={() => alert('Кнопка 3')} className="main-button">
               Кнопка 3
             </button>
           </div>
@@ -54,9 +57,9 @@ export default function MainPage({ user }) {
       )}
       <Container>
         <Row>
-          {words.map((item) => (
-            <Col sm={3}>
-              <CardNews words={item} />
+          {words.map((word) => (
+            <Col sm={4}>
+              <CardWord word={word} />
             </Col>
           ))}
         </Row>

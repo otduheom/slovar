@@ -1,17 +1,15 @@
 import Card from 'react-bootstrap/Card';
 
-function CardWord({ words }) {
+export default function CardWord({ word }) {
   return (
-    <Card style={{ width: '28rem' }}>
+    <Card style={{ width: '25rem' }}>
       <Card.Body>
-        <Card.Title>{words}</Card.Title>
+        <Card.Title>{word.name}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">{word.category}</Card.Subtitle>
-        <Card.Text>{words.desc}</Card.Text>
-        <Card.Text>{words.example}</Card.Text>
-        <Card.Link href="#">{words.LikeLike}</Card.Link>
+        <Card.Text>{word.desc}</Card.Text>
+        <Card.Text>{word.example}</Card.Text>
+        <Card.Link href="#">{word.countLike}</Card.Link>
       </Card.Body>
     </Card>
   );
 }
-
-export default CardWord;
