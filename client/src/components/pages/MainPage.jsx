@@ -22,20 +22,14 @@ export default function MainPage({ user }) {
     ? words.filter((word) => word.category === selectedCategory)
     : words;
 
-  //Регистрация
-
-  const testProtectedRequest = async () => {
+  const handleToggleLike = async (wordId) => {
     try {
-      // Запрос пойдет на /api/test (baseURL + /test)
-      const res = await axiosInstance.get('/test');
-      console.log('Success response from /api/test:', res.data);
-      alert(`Success: ${res.data.message}\nUser email: ${res.data.userDataFromToken.email}`);
+      const res = await axiosInstance.post(`/words/${wordId}/like`);
+      const { countLike } = res.data;
+
+      setWords((prev) => prev.map((word) => (word.id === wordId ? { ...word, countLike } : word)));
     } catch (error) {
-      console.error(
-        'Error response from /api/test:',
-        error.response ? error.response.data : error.message,
-      );
-      alert(`Error: ${error.response ? error.response.data.message : error.message}`);
+      console.error('Error toggling like:', error.response ? error.response.data : error.message);
     }
   };
 
@@ -61,7 +55,7 @@ export default function MainPage({ user }) {
             <Row className="g-4">
               {filteredWords.map((word) => (
                 <Col sm={4} key={word.id} className="d-flex">
-                  <CardWord word={word} />
+                  <CardWord word={word} onToggleLike={handleToggleLike} />
                 </Col>
               ))}
             </Row>
