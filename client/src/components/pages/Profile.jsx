@@ -1,9 +1,9 @@
-import React from 'react'
-
-function Profile() {
+function Profile({ user }) {
   return (
-    <div>Profile</div>
-  )
+    <div>
+      <h2>{user?.data?.name}</h2>
+    </div>
+  );
 }
 
-export default Profile
+export default Profile;

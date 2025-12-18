@@ -8,6 +8,7 @@ export default function MainPage({ user }) {
   //Слова из БД
 
   const [words, setWords] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
     axios.get('/api/words').then((response) => {
@@ -15,6 +16,11 @@ export default function MainPage({ user }) {
       console.log(response.data);
     });
   }, []);
+
+  // Фильтрация слов по выбранной категории
+  const filteredWords = selectedCategory
+    ? words.filter((word) => word.category === selectedCategory)
+    : words;
 
   //Регистрация
 
@@ -35,35 +41,35 @@ export default function MainPage({ user }) {
 
   return (
     <>
-      <h2>Welcome to the Main Page</h2>
+      <h2>Добро пожаловать на главную страницу</h2>
       {user?.status === 'logged' ? (
         <>
           <p>You are logged in as {user.data.name || user.data.email}.</p>
 
           <div className="buttons-container">
-            <button onClick={() => alert('Кнопка 1')} className="main-button">
-              Кнопка 1
+            <button onClick={() => setSelectedCategory('Миллениалы')} className="main-button">
+              Миллениалы
             </button>
-            <button onClick={() => alert('Кнопка 2')} className="main-button">
-              Кнопка 2
+            <button onClick={() => setSelectedCategory('Бумеры')} className="main-button">
+              Бумеры
             </button>
-            <button onClick={() => alert('Кнопка 3')} className="main-button">
-              Кнопка 3
+            <button onClick={() => setSelectedCategory('Поколение Z')} className="main-button">
+              Зумеры
             </button>
           </div>
+          <Container>
+            <Row>
+              {filteredWords.map((word) => (
+                <Col sm={4} key={word.id}>
+                  <CardWord word={word} />
+                </Col>
+              ))}
+            </Row>
+          </Container>
         </>
       ) : (
         <p>You are a guest.</p>
       )}
-      <Container>
-        <Row>
-          {words.map((word) => (
-            <Col sm={4}>
-              <CardWord word={word} />
-            </Col>
-          ))}
-        </Row>
-      </Container>
 
       {/* Кнопка для проверки токена */}
       <button
