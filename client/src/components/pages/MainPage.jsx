@@ -44,7 +44,7 @@ export default function MainPage({ user }) {
       <h2>Добро пожаловать на главную страницу</h2>
       {user?.status === 'logged' ? (
         <>
-          <p>You are logged in as {user.data.name || user.data.email}.</p>
+          <p>Вы вошли как {user.data.name || user.data.email}.</p>
 
           <div className="buttons-container">
             <button onClick={() => setSelectedCategory('Миллениалы')} className="main-button">
@@ -58,9 +58,9 @@ export default function MainPage({ user }) {
             </button>
           </div>
           <Container>
-            <Row>
+            <Row className="g-4">
               {filteredWords.map((word) => (
-                <Col sm={4} key={word.id}>
+                <Col sm={4} key={word.id} className="d-flex">
                   <CardWord word={word} />
                 </Col>
               ))}
@@ -68,16 +68,8 @@ export default function MainPage({ user }) {
           </Container>
         </>
       ) : (
-        <p>You are a guest.</p>
+        <p>Вы не вошли в систему.</p>
       )}
-
-      {/* Кнопка для проверки токена */}
-      <button
-        onClick={testProtectedRequest}
-        style={{ marginTop: '20px', padding: '10px', cursor: 'pointer' }}
-      >
-        Test Protected API (/api/test)
-      </button>
     </>
   );
 }

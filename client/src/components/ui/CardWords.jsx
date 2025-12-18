@@ -2,7 +2,7 @@ import Card from 'react-bootstrap/Card';
 
 export default function CardWord({ word }) {
   return (
-    <Card style={{ width: '25rem' }}>
+    <Card className="h-100">
       <Card.Body>
         <Card.Title>{word.name}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">{word.category}</Card.Subtitle>
