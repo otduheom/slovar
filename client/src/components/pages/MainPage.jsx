@@ -4,44 +4,37 @@ import { NavLink } from 'react-router';
 import axiosInstance from '../../shared/lib/axiosInstance';
 
 export default function MainPage({ user }) {
-const testProtectedRequest = async () => {
+  const testProtectedRequest = async () => {
     try {
       // Запрос пойдет на /api/test (baseURL + /test)
       const res = await axiosInstance.get('/test');
       console.log('Success response from /api/test:', res.data);
       alert(`Success: ${res.data.message}\nUser email: ${res.data.userDataFromToken.email}`);
-
     } catch (error) {
-      console.error('Error response from /api/test:', error.response ? error.response.data : error.message);
+      console.error(
+        'Error response from /api/test:',
+        error.response ? error.response.data : error.message,
+      );
       alert(`Error: ${error.response ? error.response.data.message : error.message}`);
     }
   };
 
   return (
     <>
-      <h2>Welcome to the Main Page</h2>
+      <h2>Добро пожаловать на главную страницу</h2>
       {user?.status === 'logged' ? (
         <>
-          <p>You are logged in as {user.data.name || user.data.email}.</p>
-          
+          <p>Вы вошли как {user.data.name || user.data.email}.</p>
+
           <div className="buttons-container">
-            <button 
-              onClick={() => alert('Кнопка 1')} 
-              className="main-button"
-            >
-              Кнопка 1
+            <button onClick={() => alert('Миллениалы')} className="main-button">
+              Миллениалы
             </button>
-            <button 
-              onClick={() => alert('Кнопка 2')} 
-              className="main-button"
-            >
-              Кнопка 2
+            <button onClick={() => alert('Бумеры')} className="main-button">
+              Бумеры
             </button>
-            <button 
-              onClick={() => alert('Кнопка 3')} 
-              className="main-button"
-            >
-              Кнопка 3
+            <button onClick={() => alert('Зумеры')} className="main-button">
+              Зумеры
             </button>
           </div>
         </>

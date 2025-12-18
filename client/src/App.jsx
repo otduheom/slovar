@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navigate, RouterProvider, createBrowserRouter } from 'react-router';
+import { RouterProvider, createBrowserRouter } from 'react-router';
 import ErrorPage from './components/pages/ErrorPage';
 import MainPage from './components/pages/MainPage';
 import Layout from './components/Layout';
@@ -7,9 +7,8 @@ import LoginPage from './components/pages/LoginPage';
 import SignUpPage from './components/pages/SignUpPage';
 import { useEffect } from 'react';
 import axiosInstance, { setAccessToken } from '../src/shared/lib/axiosInstance';
-import ProtectedRoute from './components/HOCs/ProtectedRoute'; 
+import ProtectedRoute from './components/HOCs/ProtectedRoute';
 import Profile from './components/pages/Profile';
-
 
 function App() {
   const [user, setUser] = useState({ status: 'logging', data: null });
@@ -25,7 +24,7 @@ function App() {
         setAccessToken('');
       });
   }, []);
-    const isAuthenticated = user?.status === 'logged';
+  const isAuthenticated = user?.status === 'logged';
   const isGuest = user?.status === 'guest';
   const router = createBrowserRouter([
     {
@@ -35,32 +34,37 @@ function App() {
       children: [
         {
           path: '/',
-          element: <MainPage user={user}/>,
+          element: <MainPage user={user} />,
         },
         {
           path: '/signup',
-                    element: (
+          element: (
             <ProtectedRoute isAllowed={isGuest} redirectTo="/">
               <SignUpPage setUser={setUser} />
             </ProtectedRoute>
-          ),},
-          {
-          path:'/profile',
-          element:<Profile />
-          },
+          ),
+        },
+        {
+          path: '/profile',
+          element: (
+            <ProtectedRoute isAllowed={isAuthenticated} redirectTo="/login">
+              <Profile user={user} />
+            </ProtectedRoute>
+          ),
+        },
         {
           path: '/login',
           element: (
             <ProtectedRoute isAllowed={isGuest} redirectTo="/">
               <LoginPage setUser={setUser} />
             </ProtectedRoute>
-          ), 
+          ),
         },
       ],
     },
   ]);
-if (user?.status === 'logging') {
-    return <div>Loading...</div>;
+  if (user?.status === 'logging') {
+    return;
   }
   return <RouterProvider router={router} />;
 }
