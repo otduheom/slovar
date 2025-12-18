@@ -15,6 +15,11 @@ class WordsController {
       console.error('Error deleting word:', error);
       return res.status(500).json({ message: 'Ошибка при удалении слова' });
     }
+  static async postOneWord(req, res) {
+    const data = req.body;
+    const word = await WordsService.postOne(data);
+    console.log(word);
+    res.status(201).json(word);
   }
 }
 module.exports = WordsController;

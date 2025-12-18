@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import axiosInstance from '../../shared/lib/axiosInstance';
-import { Row, Col, Container } from 'react-bootstrap';
+import { Row, Col, Container, Form, Button } from 'react-bootstrap';
 import CardWord from '../ui/CardWords';
 
 export default function MainPage({ user }) {
@@ -13,6 +13,18 @@ export default function MainPage({ user }) {
     const savedCategory = localStorage.getItem('selectedCategory');
     return savedCategory || null;
   });
+
+  //Форма
+  const [showForm, setShowForm] = useState(false);
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+    const response = await axios.post('/api/words', data);
+    setWords([...words, response.data]);
+    console.log(response.data);
+  };
 
   useEffect(() => {
     axios.get('/api/words').then((response) => {
@@ -92,6 +104,40 @@ export default function MainPage({ user }) {
             >
               Зумеры
             </button>
+            <Container>
+              <Button type="submit" onClick={() => setShowForm(!showForm)}>
+                Создать слово
+              </Button>
+
+              {showForm && (
+                <Form onSubmit={submitHandler}>
+                  Слово:
+                  <Form.Control type="text" name="name" />
+                  Категория:
+                  <Form.Select aria-label="Категория" name="category">
+                    <option>Категория</option>
+                    <option value="Поколение Z">Поколение Z</option>
+                    <option value="Миллениалы">Миллениалы</option>
+                    <option value="Бумеры">Бумеры</option>
+                  </Form.Select>
+                  Описание:
+                  <Form.Control type="text" name="desc" />
+                  Пример использования:
+                  <Form.Control type="text" name="example" />
+                  <Button type="submit">Добавить слово</Button>
+                </Form>
+              )}
+
+              <button onClick={() => setSelectedCategory('Миллениалы')} className="main-button">
+                Миллениалы
+              </button>
+              <button onClick={() => setSelectedCategory('Бумеры')} className="main-button">
+                Бумеры
+              </button>
+              <button onClick={() => setSelectedCategory('Поколение Z')} className="main-button">
+                Зумеры
+              </button>
+            </Container>
           </div>
           <Container style={{ marginTop: '2rem' }}>
             <Row className="g-4">

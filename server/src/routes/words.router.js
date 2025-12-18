@@ -13,6 +13,7 @@ const verifyAdmin = (req, res, next) => {
 };
 
 wordsRouter.get('/', WordsController.getAllWords);
+wordsRouter.post('/', WordsController.postOneWord);
 wordsRouter.post('/:wordId/like', verifyAccessToken, LikeController.toggleLike);
 wordsRouter.get('/liked', verifyAccessToken, LikeController.getLikedWords);
 wordsRouter.delete('/:wordId', verifyAccessToken, verifyAdmin, WordsController.deleteWord);

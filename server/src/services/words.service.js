@@ -1,6 +1,5 @@
 const { Word, Like } = require('../../db/models');
 
-
 class WordsService {
   static getAll() {
     return Word.findAll();
@@ -18,6 +17,8 @@ class WordsService {
     });
     
     return true;
+  static postOne(data) {
+    return Word.create(data);
   }
 }
 module.exports = WordsService;
