@@ -31,18 +31,40 @@ function Profile({ user }) {
     }
   };
 
+  const handleDeleteWord = async (wordId) => {
+    try {
+      await axiosInstance.delete(`/words/${wordId}`);
+      // Удаляем слово из списка
+      setLikedWords((prev) => prev.filter((word) => word.id !== wordId));
+    } catch (error) {
+      console.error('Error deleting word:', error.response ? error.response.data : error.message);
+      alert(error.response?.data?.message || 'Ошибка при удалении слова');
+    }
+  };
+
+  const isAdmin = user?.status === 'logged' && user?.data?.isAdmin;
+
   return (
-    <div>
-      <h2>{user?.data?.name}</h2>
-      <h3>Мои лайкнутые слова</h3>
+    <div className="page-container">
+      <div className="hero-section">
+        <h1 className="hero-title gradient-title">{user?.data?.name}</h1>
+        <p className="hero-subtitle">Мои лайкнутые слова</p>
+      </div>
       {likedWords.length === 0 ? (
-        <p>Вы еще не лайкнули ни одного слова</p>
+        <div style={{ textAlign: 'center', padding: '3rem' }}>
+          <p style={{ fontSize: '1.25rem', color: '#4a5568' }}>Вы еще не лайкнули ни одного слова</p>
+        </div>
       ) : (
         <Container>
           <Row className="g-4">
             {likedWords.map((word) => (
               <Col sm={4} key={word.id} className="d-flex">
-                <CardWord word={word} onToggleLike={handleToggleLike} />
+                <CardWord
+                  word={word}
+                  onToggleLike={handleToggleLike}
+                  onDelete={handleDeleteWord}
+                  isAdmin={isAdmin}
+                />
               </Col>
             ))}
           </Row>

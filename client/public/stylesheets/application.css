@@ -12,13 +12,16 @@
 /* element styling */
 html {
   height: 100%;
-  background-color: #e0f7ff;
-  /* Убрали фон-картинку, чтобы фон страниц был светло-голубым */
+  background: linear-gradient(to bottom, #f8fafc 0%, #e0f7ff 100%);
   line-height: 1.4;
 }
 
 body {
   height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -302,23 +305,191 @@ a.c-white:hover {
 .buttons-container {
   margin-top: 30px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 15px;
+  justify-content: center;
   align-items: center;
 }
 
 .main-button {
-  padding: 15px;
+  padding: 12px 24px;
   cursor: pointer;
   font-size: 16px;
-  background-color: #32bb7d;
+  font-weight: 500;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
-  border-radius: 5px;
-  min-width: 200px;
-  margin-bottom: 10px;
+  border-radius: 12px;
+  min-width: 150px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .main-button:hover {
-  background-color: #6ec7a5;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.main-button:active {
+  transform: translateY(0);
+}
+
+.main-button.active {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  box-shadow: 0 6px 12px rgba(245, 87, 108, 0.3);
+}
+
+/* Стили для карточек слов */
+.word-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.word-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.word-card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #1a202c;
+}
+
+.word-card-category {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.word-card-category.millennials {
+  background: rgba(59, 130, 246, 0.1);
+  color: #1e40af;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.word-card-category.boomers {
+  background: rgba(245, 158, 11, 0.1);
+  color: #92400e;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.word-card-category.genz {
+  background: rgba(168, 85, 247, 0.1);
+  color: #6b21a8;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.word-card-desc {
+  color: #4a5568;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  flex-grow: 1;
+}
+
+.word-card-example {
+  color: #718096;
+  font-style: italic;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  padding: 12px;
+  background: #f7fafc;
+  border-radius: 8px;
+  border-left: 3px solid #1774d7;
+}
+
+.word-card-like-button {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #f452a0 0%, #b901aa 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  align-self: flex-start;
+}
+
+.word-card-like-button:hover {
+  background: linear-gradient(135deg, #b901aa 0%, #f452a0 100%);
+  transform: scale(1.05);
+}
+
+.word-card-delete-button {
+  padding: 8px 12px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  font-size: 16px;
+}
+
+.word-card-delete-button:hover {
+  background: #dc2626;
+  transform: scale(1.05);
+}
+
+/* Градиентный заголовок */
+.gradient-title {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+/* Улучшенный header */
+.modern-header {
+  background: rgba(255, 255, 255, 0.7);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Контейнер страницы */
+.page-container {
+  background: linear-gradient(to bottom, #f8fafc 0%, #e0f7ff 100%);
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+/* Hero секция */
+.hero-section {
+  text-align: center;
+  padding: 3rem 1rem;
+  margin-bottom: 2rem;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: #4a5568;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
