@@ -31,12 +31,9 @@ app.get('/api/my-cookie', (req, res) => {
 });
 
 app.use(express.static(path.join(__dirname, '..', 'dist')));
-app.get('/{*splat}', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
-});
 
 app.use((req, res) => {
-  res.status(404).send('Not found');
+  res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
 });
 
 // const PORT = process.env.PORT || 3001;
