@@ -16,6 +16,7 @@ class WordsController {
       return res.status(500).json({ message: 'Ошибка при удалении слова' });
     }
   }
+
   
   static async postOneWord(req, res) {
     const data = req.body;
