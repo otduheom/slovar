@@ -4,50 +4,105 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     const words = [
       {
-        name: 'Автоответчик',
+        name: 'Кассета',
         category: 'Бумеры',
-        desc: 'Устройство для записи телефонных сообщений',
-        example: 'Оставьте сообщение на автоответчике.',
-        countLike: 0,
+        desc: 'Компактная магнитная лента для записи и воспроизведения звука',
+        example: 'Нашел старую кассету с записями группы "Кино".',
+        countLike: 8,
+        public: true,
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       },
       {
-        name: 'Виниловая пластинка',
+        name: 'Дискета',
         category: 'Бумеры',
-        desc: 'Аналоговый носитель звуковой информации',
-        example: 'Коллекционирую виниловые пластинки.',
-        countLike: 0,
+        desc: 'Гибкий магнитный диск для хранения данных на компьютере',
+        example: 'Раньше все программы устанавливали с дискет.',
+        countLike: 2,
+        public: true,
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       },
       {
-        name: 'Телетайп',
+        name: 'Пейджер',
         category: 'Бумеры',
-        desc: 'Электромеханическая печатная машина для передачи сообщений',
-        example: 'Новости получали через телетайп.',
-        countLike: 0,
+        desc: 'Устройство для приема коротких текстовых сообщений',
+        example: 'В 90-е у всех бизнесменов были пейджеры.',
+        countLike: 5,
+        public: true,
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       },
       {
-        name: 'Диафильм',
+        name: 'Факс',
         category: 'Бумеры',
-        desc: 'Позитивная пленка с кадрами для проектора',
-        example: 'В детстве смотрели диафильмы на стене.',
-        countLike: 0,
+        desc: 'Устройство для передачи документов по телефонной линии',
+        example: 'Отправь документы по факсу, это быстрее почты.',
+        countLike: 1,
+        public: true,
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       },
       {
-        name: 'Патефон',
+        name: 'Видеомагнитофон',
         category: 'Бумеры',
-        desc: 'Портативный граммофон с ручным приводом',
-        example: 'На патефоне слушали пластинки.',
-        countLike: 0,
+        desc: 'Устройство для записи и воспроизведения видеокассет',
+        example: 'В детстве смотрели фильмы на видеомагнитофоне.',
+        countLike: 7,
+        public: true,
         createdAt: new Date(),
-        updatedAt: new Date()
-      }
+        updatedAt: new Date(),
+      },
+      {
+        name: 'Пластинка',
+        category: 'Бумеры',
+        desc: 'Виниловая пластинка для проигрывания музыки',
+        example: 'Коллекция пластинок занимает целую стену.',
+        countLike: 10,
+        public: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'Телефон-автомат',
+        category: 'Бумеры',
+        desc: 'Публичный телефонный аппарат, работающий от монет или карт',
+        example: 'Звонил с телефона-автомата, когда мобильных еще не было.',
+        countLike: 3,
+        public: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'Диапроектор',
+        category: 'Бумеры',
+        desc: 'Устройство для просмотра диафильмов и слайдов',
+        example: 'В школе показывали учебные фильмы через диапроектор.',
+        countLike: 4,
+        public: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'Магнитофон',
+        category: 'Бумеры',
+        desc: 'Устройство для записи и воспроизведения звука на магнитной ленте',
+        example: 'Записывал музыку с радио на магнитофон.',
+        countLike: 6,
+        public: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'Телеграмма',
+        category: 'Бумеры',
+        desc: 'Срочное сообщение, передаваемое по телеграфу',
+        example: 'Получил телеграмму о важном событии.',
+        countLike: 0,
+        public: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ];
 
     await queryInterface.bulkInsert('Words', words, {});
@@ -55,7 +110,7 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     await queryInterface.bulkDelete('Words', {
-      category: 'Бумеры'
+      category: 'Бумеры',
     });
-  }
+  },
 };

@@ -51,8 +51,8 @@ function Profile({ user }) {
         <p className="hero-subtitle">Мои лайкнутые слова</p>
       </div>
       {likedWords.length === 0 ? (
-        <div style={{ textAlign: 'center', padding: '3rem' }}>
-          <p style={{ fontSize: '1.25rem', color: '#4a5568' }}>Вы еще не лайкнули ни одного слова</p>
+        <div className="guest-message">
+          <p className="guest-message-text">Вы еще не лайкнули ни одного слова</p>
         </div>
       ) : (
         <Container>

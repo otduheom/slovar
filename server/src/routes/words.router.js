@@ -16,6 +16,8 @@ wordsRouter.get('/', WordsController.getAllWords);
 wordsRouter.post('/', WordsController.postOneWord);
 wordsRouter.post('/:wordId/like', verifyAccessToken, LikeController.toggleLike);
 wordsRouter.get('/liked', verifyAccessToken, LikeController.getLikedWords);
+wordsRouter.get('/moderation', verifyAccessToken, verifyAdmin, WordsController.getUnpublishedWords);
+wordsRouter.patch('/:wordId/public', verifyAccessToken, verifyAdmin, WordsController.updatePublicStatus);
 wordsRouter.delete('/:wordId', verifyAccessToken, verifyAdmin, WordsController.deleteWord);
 
 module.exports = wordsRouter;
