@@ -1,4 +1,3 @@
-import Card from 'react-bootstrap/Card';
 import axiosInstance from '../../shared/lib/axiosInstance';
 import { useState } from 'react';
 
@@ -6,11 +5,28 @@ export default function CardWord({ word, onToggleLike, onDelete, isAdmin }) {
   //GigaChat
   //Пример использования слова из GigaChat
 
+  const [example, setExample] = useState(null);
+  const [isLoadingExample, setIsLoadingExample] = useState(false);
   const [showExample, setShowExample] = useState(false);
 
   const submitHandlerExample = async () => {
-    const response = await axiosInstance.post('/ai/completion', { wordName: word.name });
-    console.log(response);
+    if (example) {
+      // Если пример уже загружен, просто показываем/скрываем его
+      setShowExample(!showExample);
+      return;
+    }
+
+    setIsLoadingExample(true);
+    try {
+      const response = await axiosInstance.post('/ai/completion', { wordName: word.name });
+      setExample(response.data.answer);
+      setShowExample(true);
+    } catch (error) {
+      console.error('Error fetching example:', error);
+      alert('Ошибка при получении примера. Попробуйте позже.');
+    } finally {
+      setIsLoadingExample(false);
+    }
   };
 
   const getCategoryClass = (category) => {
@@ -35,12 +51,17 @@ export default function CardWord({ word, onToggleLike, onDelete, isAdmin }) {
       </span>
       <p className="word-card-desc">{word.desc}</p>
 
-      {/* {showExample && ( */}
-        <button type="button" onClick={() => submitHandlerExample()}>
-          Пример:{' '}
+      <div style={{ marginBottom: '12px' }}>
+        <button
+          type="button"
+          onClick={submitHandlerExample}
+          className="word-card-example-button"
+          disabled={isLoadingExample}
+        >
+          {isLoadingExample ? 'Загрузка...' : showExample ? 'Скрыть пример' : 'Пример'}
         </button>
-      {/* )} */}
-      {/* {showExample && <p>{submitHandlerExample}</p>} */}
+        {showExample && example && <p className="word-card-ai-example">{example}</p>}
+      </div>
 
       <div style={{ display: 'flex', gap: '8px', alignItems: 'center', marginTop: 'auto' }}>
         <button

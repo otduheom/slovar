@@ -643,6 +643,55 @@ a.c-white:hover {
   transform: scale(1.05);
 }
 
+/* Кнопка для запроса примера от AI */
+.word-card-example-button {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.word-card-example-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  transform: scale(1.05);
+}
+
+.word-card-example-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Пример использования слова от AI */
+.word-card-ai-example {
+  color: #4a5568;
+  font-style: italic;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-top: 8px;
+  padding: 12px;
+  background: #f7fafc;
+  border-radius: 8px;
+  border-left: 3px solid #667eea;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Кнопка переключения темы */
 .theme-toggle-button {
   background: transparent;
@@ -702,6 +751,12 @@ a.c-white:hover {
 
 .dark .word-card-example {
   color: #a0aec0;
+  background: #1a202c;
+  border-left-color: #667eea;
+}
+
+.dark .word-card-ai-example {
+  color: #cbd5e0;
   background: #1a202c;
   border-left-color: #667eea;
 }

@@ -1,3 +1,5 @@
+const path = require('path');
+const express = require('express');
 const app = require('./app');
 require('dotenv').config();
 
@@ -9,4 +11,8 @@ app.listen(PORT, (err) => {
   } else {
     console.log(`Server is running on port ${PORT}`);
   }
+  app.use(express.static(path.join(__dirname, '..', 'dist')));
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
+  });
 });
