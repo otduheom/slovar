@@ -1,11 +1,12 @@
 const express = require('express');
+const path = require('path');
 const serverConfig = require('./configs/serverConfig');
 const apiRouter = require('./routes/apiRouter');
 require('dotenv').config();
 
 const app = express();
 
-//Регистрация
+// Регистрация
 
 serverConfig(app);
 
@@ -29,10 +30,16 @@ app.get('/api/my-cookie', (req, res) => {
   res.send('done');
 });
 
+app.use(express.static(path.join(__dirname, '..', 'dist')));
+app.get('/{*splat}', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
+});
+
 app.use((req, res) => {
   res.status(404).send('Not found');
 });
 
-const PORT = process.env.PORT || 3001;
+// const PORT = process.env.PORT || 3001;
 
-app.listen(PORT, () => console.log(`Сервер запушен на ${PORT}`));
+// app.listen(PORT, () => console.log(`Сервер запушен на ${PORT}`));
+module.exports = app;
