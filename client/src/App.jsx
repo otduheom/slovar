@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import axiosInstance, { setAccessToken } from '../src/shared/lib/axiosInstance';
 import ProtectedRoute from './components/HOCs/ProtectedRoute';
 import Profile from './components/pages/Profile';
+import ModerationPage from './components/pages/ModerationPage';
 
 function App() {
   const [user, setUser] = useState({ status: 'logging', data: null });
@@ -26,6 +27,7 @@ function App() {
   }, []);
   const isAuthenticated = user?.status === 'logged';
   const isGuest = user?.status === 'guest';
+  const isAdmin = user?.status === 'logged' && user?.data?.isAdmin;
   const router = createBrowserRouter([
     {
       path: '/',
@@ -57,6 +59,14 @@ function App() {
           element: (
             <ProtectedRoute isAllowed={isGuest} redirectTo="/">
               <LoginPage setUser={setUser} />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: '/moderation',
+          element: (
+            <ProtectedRoute isAllowed={isAdmin} redirectTo="/">
+              <ModerationPage user={user} />
             </ProtectedRoute>
           ),
         },
