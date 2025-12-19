@@ -664,16 +664,16 @@ a.c-white:hover {
 
 /* Темная тема */
 .dark html {
-  background: linear-gradient(to bottom, #1a202c 0%, #2d3748 100%);
+  background: linear-gradient(to bottom, #1a202c 0%, #000000 100%);
 }
 
 .dark body {
-  background: linear-gradient(to bottom, #1a202c 0%, #2d3748 100%);
+  background: linear-gradient(to bottom, #1a202c 0%, #000000 100%);
   color: #e2e8f0;
 }
 
 .dark .page-container {
-  background: linear-gradient(to bottom, #1a202c 0%, #2d3748 100%);
+  background: linear-gradient(to bottom, #1a202c 0%, #000000 100%);
 }
 
 .dark .modern-header {
@@ -683,7 +683,7 @@ a.c-white:hover {
 }
 
 .dark .word-card {
-  background: #2d3748;
+  background: #1d232e;
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
