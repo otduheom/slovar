@@ -5,9 +5,10 @@ import { Row, Col, Container, Form } from 'react-bootstrap';
 import CardWord from '../ui/CardWords';
 
 export default function MainPage({ user }) {
-  //Слова из БД
 
+  //Слова из БД
   const [words, setWords] = useState([]);
+
   // Загружаем сохраненную категорию из localStorage при инициализации
   const [selectedCategory, setSelectedCategory] = useState(() => {
     const savedCategory = localStorage.getItem('selectedCategory');
@@ -17,6 +18,7 @@ export default function MainPage({ user }) {
   const [showTop10, setShowTop10] = useState(() => {
     return localStorage.getItem('showTop10') === 'true';
   });
+
 
   //Форма
   const [showForm, setShowForm] = useState(false);
@@ -236,13 +238,15 @@ export default function MainPage({ user }) {
               {filteredWords.map((word) => (
                 <Col sm={4} key={word.id} className="d-flex">
                   <CardWord
+
                     word={word}
+                    
                     onToggleLike={handleToggleLike}
                     onDelete={handleDeleteWord}
                     isAdmin={isAdmin}
                   />
                 </Col>
-              ))}
+              ))} 
             </Row>
           </Container>
         </>

@@ -1,11 +1,14 @@
 const express = require('express');
 const authRouter = require('./authRouter');
 const wordsRouter = require('./words.router');
+const aiRouter = require('./ai.router');
 const apiRouter = express.Router();
 const { verifyAccessToken } = require('../middlewares/verifyTokens');
 
 apiRouter.use('/auth', authRouter);
 apiRouter.use('/words', wordsRouter);
+apiRouter.use('/ai', aiRouter);
+
 apiRouter.get('/test', verifyAccessToken, (req, res) => {
   // Если мидлварка verifyAccessToken прошла успешно,
   // выполнение доходит до этой функции, и токен считается валидным.
