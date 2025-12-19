@@ -71,3 +71,26 @@
 .submitButton:active {
   transform: translateY(0);
 }
+
+/* Темная тема */
+:global(.dark) .form {
+  background: #2d3748;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+:global(.dark) .inputLabel {
+  color: #cbd5e0;
+}
+
+:global(.dark) .input {
+  background: #1a202c;
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #e2e8f0;
+}
+
+:global(.dark) .input:focus {
+  background: #1a202c;
+  border-color: #667eea;
+  color: #e2e8f0;
+}

@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       desc: DataTypes.STRING,
       example: DataTypes.STRING,
       countLike: DataTypes.INTEGER,
+      public: DataTypes.BOOLEAN,
     },
     {
       sequelize,

@@ -13,6 +13,10 @@ export default function MainPage({ user }) {
     const savedCategory = localStorage.getItem('selectedCategory');
     return savedCategory || null;
   });
+  // Состояние для фильтра "Топ 10"
+  const [showTop10, setShowTop10] = useState(() => {
+    return localStorage.getItem('showTop10') === 'true';
+  });
 
   //Форма
   const [showForm, setShowForm] = useState(false);
@@ -42,10 +46,36 @@ export default function MainPage({ user }) {
     }
   }, [selectedCategory]);
 
-  // Фильтрация слов по выбранной категории
-  const filteredWords = selectedCategory
-    ? words.filter((word) => word.category === selectedCategory)
-    : words;
+  // Сохраняем состояние "Топ 10" в localStorage
+  useEffect(() => {
+    if (showTop10) {
+      localStorage.setItem('showTop10', 'true');
+    } else {
+      localStorage.removeItem('showTop10');
+    }
+  }, [showTop10]);
+
+  // Фильтрация слов
+
+  const filteredWords = (() => {
+    // 1. Сначала оставляем только публичные слова
+    const publicWords = words.filter((word) => word.public === true);
+  
+    if (showTop10) {
+      // 2. Сортируем уже отфильтрованные публичные слова по лайкам и берем первые 10
+      return [...publicWords]
+        .sort((a, b) => (b.countLike || 0) - (a.countLike || 0))
+        .slice(0, 10);
+    }
+  
+    if (selectedCategory) {
+      // 3. Фильтруем публичные слова по выбранной категории
+      return publicWords.filter((word) => word.category === selectedCategory);
+    }
+  
+    // 4. Возвращаем все публичные слова, если другие фильтры не применены
+    return publicWords;
+  })();
 
   const handleToggleLike = async (wordId) => {
     try {
@@ -81,28 +111,55 @@ export default function MainPage({ user }) {
         <>
           <div className="buttons-container">
             <button
-              onClick={() => setSelectedCategory(null)}
-              className={`main-button ${selectedCategory === null ? 'active' : ''}`}
+              onClick={() => {
+                setShowTop10(false);
+                setSelectedCategory(null);
+              }}
+              className={`main-button ${!showTop10 && selectedCategory === null ? 'active' : ''}`}
             >
               Все
             </button>
             <button
-              onClick={() => setSelectedCategory('Миллениалы')}
-              className={`main-button ${selectedCategory === 'Миллениалы' ? 'active' : ''}`}
+              onClick={() => {
+                setShowTop10(false);
+                setSelectedCategory('Миллениалы');
+              }}
+              className={`main-button ${
+                !showTop10 && selectedCategory === 'Миллениалы' ? 'active' : ''
+              }`}
             >
               Миллениалы
             </button>
             <button
-              onClick={() => setSelectedCategory('Бумеры')}
-              className={`main-button ${selectedCategory === 'Бумеры' ? 'active' : ''}`}
+              onClick={() => {
+                setShowTop10(false);
+                setSelectedCategory('Бумеры');
+              }}
+              className={`main-button ${
+                !showTop10 && selectedCategory === 'Бумеры' ? 'active' : ''
+              }`}
             >
               Бумеры
             </button>
             <button
-              onClick={() => setSelectedCategory('Поколение Z')}
-              className={`main-button ${selectedCategory === 'Поколение Z' ? 'active' : ''}`}
+              onClick={() => {
+                setShowTop10(false);
+                setSelectedCategory('Поколение Z');
+              }}
+              className={`main-button ${
+                !showTop10 && selectedCategory === 'Поколение Z' ? 'active' : ''
+              }`}
             >
               Зумеры
+            </button>
+            <button
+              onClick={() => {
+                setShowTop10(true);
+                setSelectedCategory(null);
+              }}
+              className={`main-button ${showTop10 ? 'active' : ''}`}
+            >
+              Топ 10
             </button>
             <div className="create-word-button-container">
               <button
